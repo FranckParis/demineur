@@ -13,14 +13,14 @@ import java.util.Observable;
  */
 public class CellModel extends Observable {
     
-    public int row;
-    public int col;
     public boolean flag;
+    public boolean discovered;
+    public GridModel grid;
     
-    public CellModel (int r, int c){
-        this.row = r;
-        this.col = c;
+    public CellModel (GridModel g){
         this.flag = false;
+        this.discovered = false;
+        this.grid = g;
     }
     
     @Override
@@ -31,6 +31,11 @@ public class CellModel extends Observable {
 
     public void toggleFlag() {
         this.flag = !this.flag;
+        notifyObservers();
+    }
+    
+    public void discover(){
+        this.discovered = true;
         notifyObservers();
     }
 }

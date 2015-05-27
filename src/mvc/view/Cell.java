@@ -19,14 +19,10 @@ import mvc.model.CellModel;
  */
 public class Cell extends JPanel implements Observer{
     
-    public int row;
-    public int col;
     public final Grid grid;
     
-    public Cell(int r, int c, Grid g) {
+    public Cell(Grid g) {
         super();
-        this.row = r;
-        this.col = c;
         this.grid = g;
         
         //System.out.println(r);
@@ -34,13 +30,6 @@ public class Cell extends JPanel implements Observer{
         
     }
     
-    public int getRow(){
-        return this.row;
-    }
-    
-    public int getCol(){
-        return this.col;
-    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -49,7 +38,10 @@ public class Cell extends JPanel implements Observer{
             setBackground(Color.red);
         }
         else{
-            setBackground(Color.black);
+            setBackground(Color.white);
+        }
+        if(m.discovered){
+            setBackground(Color.GRAY);
         }
     }
 }

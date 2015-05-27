@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Francky/Desktop/MVC/src/mvc/MVC.java</file>
-            <file>file:/C:/Users/Francky/Desktop/MVC/src/mvc/model/CellModel.java</file>
-            <file>file:/C:/Users/Francky/Desktop/MVC/src/mvc/view/Cell.java</file>
-            <file>file:/C:/Users/Francky/Desktop/MVC/src/mvc/view/Grid.java</file>
+            <file>file:/C:/Users/Francky/Documents/demineur/src/mvc/model/GameModel.java</file>
+            <file>file:/C:/Users/Francky/Documents/demineur/src/mvc/model/CellModel.java</file>
+            <file>file:/C:/Users/Francky/Documents/demineur/src/mvc/view/Cell.java</file>
+            <file>file:/C:/Users/Francky/Documents/demineur/src/mvc/view/Grid.java</file>
+            <file>file:/C:/Users/Francky/Documents/demineur/src/mvc/MVC.java</file>
+            <file>file:/C:/Users/Francky/Documents/demineur/src/mvc/model/GridModel.java</file>
         </group>
     </open-files>
 </project-private>

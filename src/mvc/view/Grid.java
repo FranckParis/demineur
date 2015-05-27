@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import mvc.model.CellModel;
+import mvc.model.GridModel;
 
 /**
  *
@@ -50,11 +51,14 @@ public class Grid extends JFrame {
         setSize(500, 500);
         JComponent pan = new JPanel (new GridLayout(r,c));
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
-
+        
+        GridModel gridmodel = new GridModel();
         for(int i = 0; i<r;i++){
             for(int j = 0; j<c; j++){
-                Cell cell = new Cell(i,j, this);
-                CellModel m = new CellModel(i, j);
+                Cell cell = new Cell(this);
+                CellModel m = new CellModel(gridmodel);
+                
+                gridmodel.addCell(m, i, j);
                 
                 cell.setBorder(blackline);
                 pan.add(cell);
@@ -63,10 +67,13 @@ public class Grid extends JFrame {
                 cell.addMouseListener(new MouseAdapter() {
         
                     @Override
-                    public void mouseClicked(MouseEvent arg0) {
-                        super.mouseClicked(arg0);
-                        //cell.setBackground(Color.BLACK);
-                        m.toggleFlag();
+                    public void mouseClicked(MouseEvent e) {
+                        if(e.getButton()==MouseEvent.BUTTON3){
+                             m.toggleFlag();
+                        }
+                        if(e.getButton()==MouseEvent.BUTTON1){
+                            m.discover();
+                        }
                     }
             
                 });
