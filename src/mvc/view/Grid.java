@@ -31,10 +31,10 @@ public class Grid extends JFrame {
     public int row;
     public int col;
     
-    public Grid(int r, int c) {
+    public Grid(int r, int c, int n) {
         super();
         
-        build(r, c);
+        build(r, c, n);
         
         addWindowListener(new WindowAdapter() {
             @Override
@@ -45,14 +45,14 @@ public class Grid extends JFrame {
         });
     }
     
-    public void build(int r, int c)
+    public void build(int r, int c, int n)
     {
         setTitle("Démineur");
         setSize(500, 500);
         JComponent pan = new JPanel (new GridLayout(r,c));
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
         
-        GridModel gridmodel = new GridModel();
+        GridModel gridmodel = new GridModel(r, c, n);
         for(int i = 0; i<r;i++){
             for(int j = 0; j<c; j++){
                 Cell cell = new Cell(this);
@@ -82,6 +82,8 @@ public class Grid extends JFrame {
         }
         pan.setBorder(blackline);
         add(pan);
+        gridmodel.setMines();
+        gridmodel.findMines();
     }
     
 }

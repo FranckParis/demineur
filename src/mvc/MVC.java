@@ -16,7 +16,7 @@ public class MVC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        mvc.view.Grid test = new mvc.view.Grid(5, 5);
+        mvc.view.Grid test = new mvc.view.Grid(10, 10, 10);
         test.setVisible(true);
     }
     

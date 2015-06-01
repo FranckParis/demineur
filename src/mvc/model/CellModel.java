@@ -5,6 +5,7 @@
  */
 package mvc.model;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -13,14 +14,49 @@ import java.util.Observable;
  */
 public class CellModel extends Observable {
     
-    public boolean flag;
-    public boolean discovered;
-    public GridModel grid;
+    private boolean flagged;
+    private boolean discovered;
+    private GridModel grid;
+    private boolean trapped;
+    private int nbNeighMines;
     
     public CellModel (GridModel g){
-        this.flag = false;
+        this.flagged = false;
         this.discovered = false;
         this.grid = g;
+        this.trapped = false;
+    }
+    
+    public boolean getTrapped(){
+        return this.trapped;
+    }
+    
+    public void setTrapped(boolean t){
+        this.trapped = t;
+    }
+    
+    public boolean getFlagged(){
+        return this.flagged;
+    }
+    
+    public void setFlagged(boolean f){
+        this.flagged = f;
+    }
+    
+    public int getNbNeighMines() {
+        return this.nbNeighMines;
+    }
+    
+    public void setNbNeighMines(int n){
+        this.nbNeighMines = n;
+    }
+    
+    public boolean getDiscovered(){
+        return this.discovered;
+    }
+    
+    public void setDiscovered(boolean d){
+        this.discovered = d;
     }
     
     @Override
@@ -30,12 +66,29 @@ public class CellModel extends Observable {
     }
 
     public void toggleFlag() {
-        this.flag = !this.flag;
+        this.flagged = !this.flagged;
         notifyObservers();
     }
     
     public void discover(){
         this.discovered = true;
+        
+        if(trapped){
+            System.out.println("Case piegée");
+        }
+        
+        else if (nbNeighMines == 0){
+            ArrayList<CellModel> neighbours = this.grid.findNeighbours(this);
+            for(CellModel c : neighbours){
+                if(!c.trapped && !c.discovered){
+                    c.discover();
+                }
+            }
+        }
+        
         notifyObservers();
     }
+
+    
+    
 }
