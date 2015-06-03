@@ -6,8 +6,7 @@
 package mvc.view;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JLabel;
@@ -21,6 +20,7 @@ import mvc.model.CellModel;
 public class Cell extends JPanel implements Observer{
     
     public final Grid grid;
+    public static Dimension PREFERRED_SIZE = new Dimension(40,40);
     public JLabel label;
     
     public Cell(Grid g) {
@@ -28,6 +28,8 @@ public class Cell extends JPanel implements Observer{
         this.grid = g;
         this.label = new JLabel();
         this.add(this.label);
+        
+        this.setPreferredSize(this.PREFERRED_SIZE);
         
         //System.out.println(r);
         setBackground(Color.white);

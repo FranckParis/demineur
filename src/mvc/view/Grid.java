@@ -7,6 +7,7 @@ package mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,7 +17,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import mvc.model.CellModel;
 import mvc.model.GridModel;
@@ -25,30 +25,22 @@ import mvc.model.GridModel;
  *
  * @author alexisrabilloud
  */
-public class Grid extends JFrame {
+public class Grid extends JPanel {
 
-    public JTextField jt;
     public int row;
     public int col;
     
     public Grid(int r, int c, int n) {
         super();
-        
+        this.setPreferredSize(new Dimension(500, 500));
+        this.setMinimumSize(new Dimension(300,300));
+        this.setMaximumSize(new Dimension(1000,1000)); 
         build(r, c, n);
-        
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent arg0) {
-                super.windowClosing(arg0);
-                System.exit(0);
-            }
-        });
     }
     
     public void build(int r, int c, int n)
-    {
-        setTitle("Démineur");
-        setSize(500, 500);
+    {        
+        
         JComponent pan = new JPanel (new GridLayout(r,c));
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
         
