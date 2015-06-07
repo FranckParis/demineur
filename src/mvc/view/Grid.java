@@ -5,17 +5,12 @@
  */
 package mvc.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import mvc.model.CellModel;
@@ -32,9 +27,6 @@ public class Grid extends JPanel {
     
     public Grid(int r, int c, int n) {
         super();
-        this.setPreferredSize(new Dimension(500, 500));
-        this.setMinimumSize(new Dimension(300,300));
-        this.setMaximumSize(new Dimension(1000,1000)); 
         build(r, c, n);
     }
     

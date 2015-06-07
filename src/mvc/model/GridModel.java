@@ -75,7 +75,7 @@ public class GridModel {
     }
     
     public void setMines(){
-        for(int i=0; i<nbMines+1; i++){
+        for(int i=0; i<nbMines; i++){
             Random r = new Random();
             int coordx = r.nextInt(this.column);
             int coordy = r.nextInt(this.row);

@@ -6,18 +6,14 @@
 package mvc.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
+import java.awt.PopupMenu;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -26,6 +22,7 @@ import javax.swing.border.Border;
 public class MainFrame extends JFrame {
     
     public Grid grid;
+    public JMenuBar menubar;
     
     public MainFrame()
     {
@@ -47,16 +44,30 @@ public class MainFrame extends JFrame {
     public void build()
     {
         setTitle("Démineur");
+        this.setLayout(new BorderLayout());        
+        this.grid = new Grid(10,10,10);    
+        this.add(this.grid,BorderLayout.CENTER);
         
-        this.setLayout(new BorderLayout());
+        this.menubar = new JMenuBar();
+        JMenu menu = new JMenu("Nouvelle partie");
+        menubar.add(menu);
         
-        this.grid = new Grid(10,10,10);
-  
-        this.setPreferredSize(new Dimension(550,700));       
-        this.add(this.grid,BorderLayout.SOUTH);
+        JMenuItem menuItem1 = new JMenuItem("Niveau Facile",MouseEvent.BUTTON1);
+        menu.add(menuItem1);
+        
+        JMenuItem menuItem2 = new JMenuItem("Niveau Moyen",MouseEvent.BUTTON1);
+        menu.add(menuItem2);
+        
+        JMenuItem menuItem3 = new JMenuItem("Niveau Difficile",MouseEvent.BUTTON1);
+        menu.add(menuItem3);
+             
+        this.add(menubar,BorderLayout.NORTH);
+        
+        
         this.pack();
         this.setVisible(true);
         
     }
-    
+
+   
 }
