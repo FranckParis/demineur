@@ -22,13 +22,15 @@ public class GridModel {
     private int nbMines;
     private int row;
     private int column;
+    private GameModel gm;
     
     //Constructeur
-    public GridModel(int r, int c, int n){
+    public GridModel(int r, int c, int n, GameModel gm){
         this.map = new HashMap<>();
         this.row = r;
         this.column = c;
         this.nbMines = n;
+        this.gm = gm;
     }
     
     //Méthodes
@@ -75,14 +77,34 @@ public class GridModel {
     }
     
     public void setMines(){
-        for(int i=0; i<nbMines; i++){
+        int i = 0;
+        while(i<nbMines){
             Random r = new Random();
             int coordx = r.nextInt(this.column);
             int coordy = r.nextInt(this.row);
             CellModel c = findCell(coordx, coordy);
             if(!c.getTrapped()){
                 c.setTrapped(true);
+                i++;
             }
+        }
+    }
+    
+    public void checkWin(){
+        int compt = 0;
+        for(Map.Entry<CellModel, Point> entry : map.entrySet()){
+            if(entry.getKey().getTrapped() && entry.getKey().getFlagged()){
+                compt++;
+            }
+        }
+        if (compt == this.nbMines){
+           this.gm.setGameStatus(1);
+        }
+    }
+
+    void discoverAll() {
+        for(Map.Entry<CellModel, Point> entry : map.entrySet()){
+            entry.getKey().discoverCell();
         }
     }
 }

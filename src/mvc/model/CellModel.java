@@ -19,12 +19,14 @@ public class CellModel extends Observable {
     private GridModel grid;
     private boolean trapped;
     private int nbNeighMines;
+    private GameModel gm;
     
-    public CellModel (GridModel g){
+    public CellModel (GridModel g, GameModel gm){
         this.flagged = false;
         this.discovered = false;
         this.grid = g;
         this.trapped = false;
+        this.gm = gm;
     }
     
     public boolean getTrapped(){
@@ -66,8 +68,12 @@ public class CellModel extends Observable {
     }
 
     public void toggleFlag() {
-        this.flagged = !this.flagged;
-        notifyObservers();
+        
+        if(!this.discovered){
+            this.flagged = !this.flagged;
+            this.grid.checkWin();
+            notifyObservers();
+        }
     }
     
     public void discover(){
@@ -75,6 +81,8 @@ public class CellModel extends Observable {
         
         if(trapped){
             System.out.println("Case piegée");
+            this.grid.discoverAll();
+            this.gm.setGameStatus(2);
         }
         
         else if (nbNeighMines == 0){
@@ -89,6 +97,9 @@ public class CellModel extends Observable {
         notifyObservers();
     }
 
-    
+    public void discoverCell(){
+        this.discovered = true;
+        notifyObservers();
+    }
     
 }

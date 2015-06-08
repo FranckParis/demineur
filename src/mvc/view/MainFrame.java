@@ -7,6 +7,9 @@ package mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -46,14 +49,20 @@ public class MainFrame extends JFrame {
         setTitle("Démineur");
         this.setLayout(new BorderLayout());        
         this.grid = new Grid(10,10,10);    
-        this.add(this.grid,BorderLayout.CENTER);
+        
         
         this.menubar = new JMenuBar();
         JMenu menu = new JMenu("Nouvelle partie");
         menubar.add(menu);
         
         JMenuItem menuItem1 = new JMenuItem("Niveau Facile",MouseEvent.BUTTON1);
+        menuItem1.addActionListener((ActionEvent e) -> {
+            grid = new Grid(10, 10, 10);
+            add(grid,BorderLayout.CENTER);
+            System.out.println("Patate");
+        });
         menu.add(menuItem1);
+        
         
         JMenuItem menuItem2 = new JMenuItem("Niveau Moyen",MouseEvent.BUTTON1);
         menu.add(menuItem2);
@@ -63,7 +72,7 @@ public class MainFrame extends JFrame {
              
         this.add(menubar,BorderLayout.NORTH);
         
-        
+        this.add(this.grid,BorderLayout.CENTER);
         this.pack();
         this.setVisible(true);
         

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import mvc.model.CellModel;
@@ -32,7 +33,7 @@ public class Cell extends JPanel implements Observer{
         this.setPreferredSize(this.PREFERRED_SIZE);
         
         //System.out.println(r);
-        setBackground(Color.white);
+        setBackground(Color.GRAY);
         
     }
     
@@ -40,8 +41,9 @@ public class Cell extends JPanel implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         CellModel m = (CellModel) o;
-        if(m.getFlagged()){
-            setBackground(Color.red);
+        if(m.getFlagged() && !m.getDiscovered()){
+            this.setBackground(Color.white);
+            this.label.setIcon(new ImageIcon(this.getClass().getResource("/mvc/resources/flag.png")));
         }
         
         else if (m.getDiscovered() && !m.getTrapped()){
@@ -50,13 +52,16 @@ public class Cell extends JPanel implements Observer{
                 this.label.setText(s);
                 this.label.setVisible(true);
             }
-            setBackground(Color.GRAY);
+            setBackground(Color.LIGHT_GRAY);
+            this.label.setIcon(new ImageIcon());
         }
         else if (m.getDiscovered() && m.getTrapped()){
-            setBackground(Color.ORANGE);
+            this.setBackground(Color.red);
+            this.label.setIcon(new ImageIcon(this.getClass().getResource("/mvc/resources/bomb.png")));
         }
         else {
-            setBackground(Color.white);
+            setBackground(Color.GRAY);
+            this.label.setIcon(new ImageIcon());
         }
     }
 }

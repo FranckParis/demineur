@@ -11,4 +11,26 @@ package mvc.model;
  */
 public class GameModel {
     
+    //Attributs
+    private int gameStatus = 0;  //0 : partie en cours  1: partie gagnée  2: partie perdue
+    
+    
+    //Méthodes
+    public int getGameStatus(){
+        return this.gameStatus;
+    }
+    
+    public void setGameStatus(int gs){
+        this.gameStatus = gs;
+        this.checkGameStatus();
+    }
+
+    public void checkGameStatus() {
+        if(this.gameStatus == 1){
+            System.out.println("Partie gagnée !");
+        }
+        else if(this.gameStatus == 2){
+            System.out.println("Partie perdue ! ");
+        }
+    }
 }

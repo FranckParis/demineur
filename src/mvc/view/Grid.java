@@ -14,6 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import mvc.model.CellModel;
+import mvc.model.GameModel;
 import mvc.model.GridModel;
 
 /**
@@ -35,12 +36,13 @@ public class Grid extends JPanel {
         
         JComponent pan = new JPanel (new GridLayout(r,c));
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
+        GameModel gm = new GameModel();
         
-        GridModel gridmodel = new GridModel(r, c, n);
+        GridModel gridmodel = new GridModel(r, c, n, gm);
         for(int i = 0; i<r;i++){
             for(int j = 0; j<c; j++){
                 Cell cell = new Cell(this);
-                CellModel m = new CellModel(gridmodel);
+                CellModel m = new CellModel(gridmodel, gm);
                 
                 gridmodel.addCell(m, i, j);
                 
