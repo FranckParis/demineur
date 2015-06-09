@@ -6,9 +6,12 @@
 package mvc.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -16,6 +19,7 @@ import javax.swing.border.Border;
 import mvc.model.CellModel;
 import mvc.model.GameModel;
 import mvc.model.GridModel;
+import mvc.model.Timer;
 
 /**
  *
@@ -26,22 +30,26 @@ public class Grid extends JPanel {
     public int row;
     public int col;
     
-    public Grid(int r, int c, int n) {
+    public Grid(int r, int c, int n, Dimension d, GameModel gm) {
         super();
-        build(r, c, n);
+        build(r, c, n, d, gm);
     }
     
-    public void build(int r, int c, int n)
+    public void build(int r, int c, int n, Dimension d, GameModel gm)
     {        
         
         JComponent pan = new JPanel (new GridLayout(r,c));
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
-        GameModel gm = new GameModel();
-        
         GridModel gridmodel = new GridModel(r, c, n, gm);
+        gm.setGridModel(gridmodel);
+        System.out.println(gridmodel.getNbMines());
+        gm.setNbFlagsRemaining(gridmodel.getNbMines());
+        Timer timer = new Timer(gm);
+        gm.setTimer(timer);
+        
         for(int i = 0; i<r;i++){
             for(int j = 0; j<c; j++){
-                Cell cell = new Cell(this);
+                Cell cell = new Cell(this,d);
                 CellModel m = new CellModel(gridmodel, gm);
                 
                 gridmodel.addCell(m, i, j);
@@ -70,6 +78,7 @@ public class Grid extends JPanel {
         add(pan);
         gridmodel.setMines();
         gridmodel.findMines();
+        timer.start();
     }
     
 }

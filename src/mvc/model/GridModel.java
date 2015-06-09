@@ -23,6 +23,7 @@ public class GridModel {
     private int row;
     private int column;
     private GameModel gm;
+    private int nbFlagsRemaining;
     
     //Constructeur
     public GridModel(int r, int c, int n, GameModel gm){
@@ -31,6 +32,7 @@ public class GridModel {
         this.column = c;
         this.nbMines = n;
         this.gm = gm;
+        this.nbFlagsRemaining = n;
     }
     
     //Méthodes
@@ -82,7 +84,8 @@ public class GridModel {
             Random r = new Random();
             int coordx = r.nextInt(this.column);
             int coordy = r.nextInt(this.row);
-            CellModel c = findCell(coordx, coordy);
+            CellModel c = findCell(coordy, coordx);
+            
             if(!c.getTrapped()){
                 c.setTrapped(true);
                 i++;
@@ -102,9 +105,36 @@ public class GridModel {
         }
     }
 
-    void discoverAll() {
+    public void discoverAll() {
         for(Map.Entry<CellModel, Point> entry : map.entrySet()){
             entry.getKey().discoverCell();
         }
     }
+    
+    public void updateNbFlagsRemaining(boolean flag){
+        if(flag){
+            this.nbFlagsRemaining--;
+        }
+        else{
+            this.nbFlagsRemaining++;
+        }
+        this.gm.updateNbFlagsRemaining(this.nbFlagsRemaining);
+    }
+    
+    public int getNbMines(){
+        return this.nbMines;
+    }
+    
+    public void setNbMines(int n){
+        this.nbMines = n;
+    }
+    
+    public int getNbFlagsRemaining(){
+        return this.nbFlagsRemaining;
+    }
+    
+    public void setNbFlagsRemaining(int n){
+        this.nbFlagsRemaining = n;
+    }
+    
 }

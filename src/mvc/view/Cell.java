@@ -21,16 +21,15 @@ import mvc.model.CellModel;
 public class Cell extends JPanel implements Observer{
     
     public final Grid grid;
-    public static Dimension PREFERRED_SIZE = new Dimension(40,40);
     public JLabel label;
     
-    public Cell(Grid g) {
+    public Cell(Grid g, Dimension d) {
         super();
         this.grid = g;
         this.label = new JLabel();
         this.add(this.label);
         
-        this.setPreferredSize(this.PREFERRED_SIZE);
+        this.setPreferredSize(d);
         
         //System.out.println(r);
         setBackground(Color.GRAY);

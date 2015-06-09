@@ -70,31 +70,40 @@ public class CellModel extends Observable {
     public void toggleFlag() {
         
         if(!this.discovered){
-            this.flagged = !this.flagged;
-            this.grid.checkWin();
+            if(flagged){
+                this.flagged = !this.flagged;
+                this.grid.updateNbFlagsRemaining(flagged);
+            }
+            else if(!flagged && grid.getNbFlagsRemaining()>0){
+                this.flagged = !this.flagged;
+                this.grid.updateNbFlagsRemaining(flagged);
+                this.grid.checkWin();
+            }
+                   
             notifyObservers();
         }
+        
     }
     
     public void discover(){
-        this.discovered = true;
+        if(!flagged){
+            this.discovered = true;
+            if(trapped){
+                this.grid.discoverAll();
+                this.gm.setGameStatus(2);
+            }
         
-        if(trapped){
-            System.out.println("Case piegée");
-            this.grid.discoverAll();
-            this.gm.setGameStatus(2);
-        }
-        
-        else if (nbNeighMines == 0){
-            ArrayList<CellModel> neighbours = this.grid.findNeighbours(this);
-            for(CellModel c : neighbours){
-                if(!c.trapped && !c.discovered){
-                    c.discover();
+            else if (nbNeighMines == 0){
+                ArrayList<CellModel> neighbours = this.grid.findNeighbours(this);
+                for(CellModel c : neighbours){
+                    if(!c.trapped && !c.discovered){
+                        c.discover();
+                    }
                 }
             }
-        }
         
-        notifyObservers();
+            notifyObservers();
+        } 
     }
 
     public void discoverCell(){
