@@ -76,4 +76,8 @@ public class GameModel extends Observable {
     public int getVal() {
         return this.timeVal;
     }
+    
+    public void setRunning(boolean b){
+        this.timer.setRunning(b);
+    }
 }

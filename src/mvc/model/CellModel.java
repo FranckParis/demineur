@@ -16,10 +16,10 @@ public class CellModel extends Observable {
     
     private boolean flagged;
     private boolean discovered;
-    private GridModel grid;
+    private final GridModel grid;
     private boolean trapped;
     private int nbNeighMines;
-    private GameModel gm;
+    private final GameModel gm;
     
     public CellModel (GridModel g, GameModel gm){
         this.flagged = false;

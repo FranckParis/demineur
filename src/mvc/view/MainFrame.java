@@ -27,9 +27,11 @@ import mvc.model.GameModel;
  *
  * @author alexisrabilloud
  */
-public class MainFrame extends JFrame implements Observer {
+public final class MainFrame extends JFrame implements Observer {
     
     public Grid grid;
+    public int timer;
+    
     public JMenuBar menubar;
     public JPanel info;
     public JLabel flags;
@@ -59,6 +61,7 @@ public class MainFrame extends JFrame implements Observer {
     public void build()
     {
         setTitle("Démineur");
+        this.timer =0;
         this.setLayout(new BorderLayout());
         GameModel g = new GameModel();
         g.addObserver(this);
@@ -93,6 +96,7 @@ public class MainFrame extends JFrame implements Observer {
         
         JMenuItem menuItem1 = new JMenuItem("Niveau Facile",MouseEvent.BUTTON1);
         menuItem1.addActionListener((ActionEvent e) -> {
+            this.timer = 0;
             grid.removeAll();
             GameModel gm = new GameModel();
             gm.addObserver(this);
@@ -107,6 +111,7 @@ public class MainFrame extends JFrame implements Observer {
         
         JMenuItem menuItem2 = new JMenuItem("Niveau Moyen",MouseEvent.BUTTON1);
         menuItem2.addActionListener((ActionEvent e) -> {
+            this.timer = 0;
             grid.removeAll();
             GameModel gm = new GameModel();
             gm.addObserver(this);
@@ -120,6 +125,7 @@ public class MainFrame extends JFrame implements Observer {
         
         JMenuItem menuItem3 = new JMenuItem("Niveau Difficile",MouseEvent.BUTTON1);
         menuItem3.addActionListener((ActionEvent e) -> {
+            this.timer = 0;
             grid.removeAll();
             GameModel gm = new GameModel();
             gm.addObserver(this);
@@ -157,6 +163,11 @@ public class MainFrame extends JFrame implements Observer {
         else if(gm.getGameStatus() == 2){
             JOptionPane.showMessageDialog(this, "Partie perdue, réessayez ! ", "Défaite!", JOptionPane.ERROR_MESSAGE);
         }
+        if(gm.getVal()>this.timer+1){
+            gm.setRunning(false);
+        }
+        this.timer = gm.getVal();
+        
         flags.setText(Integer.toString(gm.getNbFlagsRemaining()));
         time.setText(Integer.toString(gm.getVal()));
         

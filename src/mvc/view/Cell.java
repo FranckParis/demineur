@@ -31,7 +31,6 @@ public class Cell extends JPanel implements Observer{
         
         this.setPreferredSize(d);
         
-        //System.out.println(r);
         setBackground(Color.GRAY);
         
     }

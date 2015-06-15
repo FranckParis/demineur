@@ -18,11 +18,11 @@ import java.util.Random;
 public class GridModel {
     
     //Attributs
-    private HashMap<CellModel, Point> map;
+    private final HashMap<CellModel, Point> map;
     private int nbMines;
-    private int row;
-    private int column;
-    private GameModel gm;
+    private final int row;
+    private final int column;
+    private final GameModel gm;
     private int nbFlagsRemaining;
     
     //Constructeur

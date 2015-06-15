@@ -10,8 +10,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -25,7 +23,7 @@ import mvc.model.Timer;
  *
  * @author alexisrabilloud
  */
-public class Grid extends JPanel {
+public final class Grid extends JPanel {
 
     public int row;
     public int col;
@@ -42,7 +40,6 @@ public class Grid extends JPanel {
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
         GridModel gridmodel = new GridModel(r, c, n, gm);
         gm.setGridModel(gridmodel);
-        System.out.println(gridmodel.getNbMines());
         gm.setNbFlagsRemaining(gridmodel.getNbMines());
         Timer timer = new Timer(gm);
         gm.setTimer(timer);
